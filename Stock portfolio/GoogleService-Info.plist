@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>135822171160-r62aerj64l3nd9g7736a5pfq15lg2jvf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.135822171160-r62aerj64l3nd9g7736a5pfq15lg2jvf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD3mZuTMLm_lK11dbuL2yitgtQDDKo0Rtk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>135822171160</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Yoni.Stock-portfolio</string>
+	<key>PROJECT_ID</key>
+	<string>stockportfoliofinalproject</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stockportfoliofinalproject.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:135822171160:ios:2f8dce663a9a4d0169376d</string>
+	<key>DATABASE_URL</key>
+	<string>https://stockportfoliofinalproject.firebaseio.com</string>
+</dict>
+</plist>
