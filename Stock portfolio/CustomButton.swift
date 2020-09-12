@@ -22,7 +22,7 @@ class CustomButton: UIButton {
     
     func setupeButton() {
          setShadow()
-        setRadius()
+         setRadius()
         
     }
     

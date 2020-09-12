@@ -9,12 +9,12 @@
 import Foundation
 
 //BuyStockPresenter Protocol
-protocol BuyStockPresenterDelegate{
+protocol StockSelectionPresenterDelegate{
     func reloadData()
 }
 
-class BuyStockPresenter{
-    var buyStockPresenterDelegate:BuyStockPresenterDelegate!
+class StockSelectionPresenter{
+    var stockSelectionPresenterDelegate:StockSelectionPresenterDelegate!
     var industry = [Industry](){
         didSet{
             filterdIndustry = industry
@@ -22,8 +22,8 @@ class BuyStockPresenter{
     }
     var filterdIndustry = [Industry]()
     
-    init(buyStockPresenterDelegate: BuyStockPresenterDelegate) {
-        self.buyStockPresenterDelegate = buyStockPresenterDelegate
+    init(stockSelectionPresenterDelegate: StockSelectionPresenterDelegate) {
+        self.stockSelectionPresenterDelegate = stockSelectionPresenterDelegate
         readFromLocalJson()
     }
     
@@ -117,7 +117,7 @@ class BuyStockPresenter{
         }else{
             filterdIndustry = industry
         }
-        buyStockPresenterDelegate.reloadData()
+        stockSelectionPresenterDelegate.reloadData()
     }
     
 }

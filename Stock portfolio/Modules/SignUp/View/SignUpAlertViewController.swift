@@ -43,6 +43,9 @@ class SignUpAlertViewController: UIViewController {
     
     private func configureParticals(){
         alertView.layer.cornerRadius = 20
+        buttons.forEach {
+            $0.layer.cornerRadius = $0.frame.size.height / 2
+        }
         
         firstNameLabel.becomeFirstResponder()
         

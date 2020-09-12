@@ -13,4 +13,14 @@ extension Double{
     func toString2Digits() ->String{
         String(format: "%.2f", self)
     }
+    
+    func roundedWithAbbreviations() -> String{
+        let million = self / 1_000_000
+        let billion = self / 1_000_000_000
+        if billion >= 1.0{
+            return "\(billion.toString2Digits())B"
+        }else{
+            return "\(million.toString2Digits())M"
+        }
+    }
 }

@@ -21,7 +21,7 @@ class BuyScreenViewController: UIViewController {
     @IBOutlet weak var sumOfBuy: UILabel!
     @IBOutlet weak var buyButton: CustomButton!
     @IBOutlet weak var cancelButton: CustomButton!
-
+    
     
     
     
@@ -31,10 +31,10 @@ class BuyScreenViewController: UIViewController {
     private var stockDetail: StockDetaile?
     var bill: Double?
     var user:User!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         configurePage()
@@ -55,7 +55,7 @@ class BuyScreenViewController: UIViewController {
     }
     @IBAction func cancelbuttonTapped(_ sender: CustomButton) {
         sender.shakeButtomButton()
-        Router.shared.goToHomeVC()
+        navigationController?.popViewController(animated: true)
     }
     @IBAction func startEditingTapped(_ sender: UITextField) {
         
@@ -140,10 +140,10 @@ class BuyScreenViewController: UIViewController {
                                 self.showAlertController("Congratulations", "You have purchased \(amount) \(self.stockVM!.symbole) stocks ")
                                 UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
                                     if  let amountOfStocks = Utilities.shared.user.stocks.first(where: {$0.symbole == self.stockVM?.symbole})?.amount{
-                                         self.yourStockAmount.text = "You Own: \(amountOfStocks)"
+                                        self.yourStockAmount.text = "You Own: \(amountOfStocks)"
                                         self.amountOfStocks.text = ""
                                     }
-                                   
+                                    
                                 }
                             }
                             

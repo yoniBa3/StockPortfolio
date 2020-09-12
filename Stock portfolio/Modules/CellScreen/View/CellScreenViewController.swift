@@ -23,18 +23,13 @@ class CellScreenViewController: UIViewController {
     //MARK: -Properties
     public static let identifier = "GoToCellSegue"
     var stock:HomeScreenStockVM?
-    var stockDetaile:StockDetaile?
-    var userAmountOfStocks:Int?
-    var bill:Double?
-    var user: User!
+    var cellStockVM: CellStockVM!
     
     //MARK: -Lifecycle
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         configurePage()
         
     }
@@ -46,24 +41,19 @@ class CellScreenViewController: UIViewController {
     @IBAction func cellButtonTapped(_ sender: CustomButton) {
         sender.shakeButtomButton()
         validateCell()
-        print("Tapped")
     }
     
     @IBAction func cancelButtonTapped(_ sender: CustomButton) {
         sender.shakeButtomButton()
+        Router.shared.goToHomeVC()
     }
     
     @IBAction func editingDidChangeTapped(_ sender: UITextField) {
         if let text = sender.text{
             if !text.isEmpty{
                 sumOfCellLabel.isHidden = false
-                if let price = stockDetaile?.price?.regularMarketPrice?.raw{
-                    if let amount = Int(text){
-                        let bil = Double(amount) * price
-                        self.bill = bil
-                        print(bil.toString2Digits())
-                        self.sumOfCellLabel.text = "Worth: \((bil * user.fromCurrency / user.toCurrency).toString2Digits()) \(user.currencySymbole)"
-                    }
+                if let amount = Int(text){
+                    self.sumOfCellLabel.text = cellStockVM.getBillForLabel(amountOfStocks: amount)
                 }
             }else{
                 sumOfCellLabel.isHidden = true
@@ -78,66 +68,68 @@ class CellScreenViewController: UIViewController {
         sumOfCellLabel.isHidden = true
         stockAmountTextField.isEnabled = false
         cellButton.isEnabled = false
-        user = Utilities.shared.user
+        configureBackButton()
     
         if let stock = stock{
             stockSymboleLabel.text = stock.symbole
             YahooFinance.shared.serverRequestWithStockStruct(with: stock.symbole) { (stockDetaile) in
-                self.stockDetaile = stockDetaile
+                self.cellStockVM = CellStockVM(stockDetail: stockDetaile, stock: stock)
                 self.showStockData()
             }
         }
     
     }
     
+    private func configureBackButton(){
+        self.navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goHome))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func goHome(){
+        Router.shared.goToHomeVC()
+    }
+    
     private func showStockData(){
         activityIndicator.stopAnimating()
         stockAmountTextField.isEnabled = true
         cellButton.isEnabled = true
-        if let stockDetaile = self.stockDetaile{
-            if let price = stockDetaile.price?.regularMarketPrice?.raw{
-                priceLabel.text = "Price: \((price * user.fromCurrency / user.toCurrency).toString2Digits()) \(user.currencySymbole)"
-            }
-            companyLabel.text = "Company: \(stock?.company ?? "N/A")"
-            marketCapLabel.text = "MarketKap: \(stockDetaile.price?.marketCap?.fmt ?? "N/A")"
-            var yourAmountOfStocks = 0
-            if let stock = Utilities.shared.user.stocks.first(where: {$0.symbole == stock!.symbole}){
-                yourAmountOfStocks = stock.amount
-                self.userAmountOfStocks = stock.amount
-            }
-            self.yourAmountOfStocks.text = "You own: \(yourAmountOfStocks)"
-        }
+        priceLabel.text = cellStockVM.priceForLabel
+        companyLabel.text = cellStockVM.company
+        marketCapLabel.text = cellStockVM.marketKap
+        yourAmountOfStocks.text = cellStockVM.userAmountOfStocksForLabel
+            
     }
     
     private func validateCell(){
         if let chosenAmountToCellText = stockAmountTextField.text{
             if let chosenAmountToCell = Int(chosenAmountToCellText){
-                if let usersAmountOfStocks = self.userAmountOfStocks{
-                    if usersAmountOfStocks == 0{
+                if cellStockVM.userAmountOfStocks == 0{
                         showAlertController("Alert", "You have to cell at list 1 stock")
                         return
                     }
-                    if chosenAmountToCell > usersAmountOfStocks{
+                    if chosenAmountToCell > cellStockVM.userAmountOfStocks{
                         showAlertController("Alert", "You want to cell more stocks then you have")
                         
                     }else{
-                        UserDataBase.shared.cellStocks(chosenAmountToCell, stock!.symbole, stock!.company, self.bill!) { (finish) in
+                        let bill = cellStockVM.getBill(chosenAmountToCell)
+                        self.activityIndicator.startAnimating()
+                        UserDataBase.shared.cellStocks(chosenAmountToCell, stock!.symbole, stock!.company, bill) { (finish) in
                             if finish{
+                                self.activityIndicator.stopAnimating()
                                 self.showAlertController("Congretulations", "You cell has been approved")
                                 UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
-                                    Router.shared.goToHomeVC()
+                                    self.yourAmountOfStocks.text = self.cellStockVM.userAmountOfStocksForLabel
+                                    self.stockAmountTextField.text = ""
                                 }
                             }
-                        }
                     }
                 }
+            }else{
+                showAlertController("Alert", "You have enterd an invalid value")
             }
         }
     }
     
     
-    
-    
-    
-
 }

@@ -51,6 +51,7 @@
 		E95C848E24EC4D1F00FC2A89 /* CurrencyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C848D24EC4D1F00FC2A89 /* CurrencyValue.swift */; };
 		E95C849024EC532500FC2A89 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C848F24EC532500FC2A89 /* Currency.swift */; };
 		E95C849224EDB09C00FC2A89 /* CurrencySimbols.json in Resources */ = {isa = PBXBuildFile; fileRef = E95C849124EDA18D00FC2A89 /* CurrencySimbols.json */; };
+		E9A1C247250C008C0022520A /* CellStockVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1C246250C008C0022520A /* CellStockVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		E95C848D24EC4D1F00FC2A89 /* CurrencyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyValue.swift; sourceTree = "<group>"; };
 		E95C848F24EC532500FC2A89 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		E95C849124EDA18D00FC2A89 /* CurrencySimbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CurrencySimbols.json; sourceTree = "<group>"; };
+		E9A1C246250C008C0022520A /* CellStockVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStockVM.swift; sourceTree = "<group>"; };
 		EF2C60BCEA250E0BD4D4F316 /* Pods_Stock_portfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_portfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -305,6 +307,7 @@
 		E94E0C8224FE31EF0087BAFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E9A1C246250C008C0022520A /* CellStockVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -344,7 +347,7 @@
 		E94E0C9A2504192B0087BAFC /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				E94E0C9D250419370087BAFC /* Viewmodel */,
+				E94E0C9D250419370087BAFC /* ViewModel */,
 				E94E0C9C250419360087BAFC /* View */,
 				E94E0C9B250419350087BAFC /* Presenter */,
 			);
@@ -366,11 +369,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E94E0C9D250419370087BAFC /* Viewmodel */ = {
+		E94E0C9D250419370087BAFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Viewmodel;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E94E0C9E250419590087BAFC /* FirstLoading */ = {
@@ -727,6 +730,7 @@
 				E94E0C2824F088420087BAFC /* StockViewModel.swift in Sources */,
 				E94E0C9125039AEB0087BAFC /* UserStockTableViewCell.swift in Sources */,
 				E94E0C3224F11F880087BAFC /* StockVMTableViewCell.swift in Sources */,
+				E9A1C247250C008C0022520A /* CellStockVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

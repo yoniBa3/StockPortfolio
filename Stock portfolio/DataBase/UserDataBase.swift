@@ -103,6 +103,7 @@ class UserDataBase{
                 print(err.localizedDescription)
                 complation(false)
             }else{
+                //3015.45
                 if let document = documnets?.documents[0]{
                     self.db.collection("users").document(document.documentID).setData(["lastStockWorth":worth], merge: true)
                     complation(true)

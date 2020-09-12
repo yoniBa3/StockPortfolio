@@ -12,6 +12,7 @@ protocol HomeScreenPresenterDelegate {
     func loadStockTable()
     func showUserMoneyAmount(_ moneyAmount: String ,_ currencySymbole: String ,_ statusAcount: AcountStatus)
     func refreshUserMoneyAmountInDifferentCurency(_ moneyAmount: String , _ currencySymbole: String)
+    func showUserFullBalnce(_ title: String ,_ message:String)
 }
 
 import Foundation
@@ -35,7 +36,6 @@ class HomeScreenPresenter{
     }
     
     var chosenStock: HomeScreenStockVM?
-    var chosenStockDetail: StockDetaile?
     
     //Currencies
     var curreciesWithSymboles:CurrencySymboles = [:] {
@@ -72,7 +72,7 @@ class HomeScreenPresenter{
     }
     
     //Stocks Functions
-    private func loadTableStockData(){
+     func loadTableStockData(){
         let user = Utilities.shared.user
         if user.stocks.count == 1 {
             delgate.showUserMoneyAmount(user.cash.toString2Digits(), user.currencySymbole, .positive)
@@ -112,7 +112,11 @@ class HomeScreenPresenter{
         
         let user = Utilities.shared.user
         
-        UserDataBase.shared.saveLastStockWorth(user.uId, worth: newStockWorth) { (_) in }
+        UserDataBase.shared.saveLastStockWorth(user.uId, worth: newStockWorth) { (finish) in
+            if finish{
+                print("success")
+            }
+        }
         let moneyAmount = ((user.cash + newStockWorth) * user.fromCurrency / user.toCurrency).toString2Digits()
         delgate.showUserMoneyAmount(moneyAmount, user.currencySymbole, statusAcount)
         
@@ -133,7 +137,6 @@ class HomeScreenPresenter{
     
     func setUserStockSelection(atIndex index: Int) {
         if userStocks.count > index {
-            chosenStockDetail = userStocks[index].stockDetaile
             chosenStock = homeScreenStockVM[index]
         }
     }
@@ -203,6 +206,16 @@ class HomeScreenPresenter{
         }
         
         delgate.loadCurrencyTable()
+    }
+    
+    
+    func showFullBalanceInAlert(){
+        let user = Utilities.shared.user
+        let currencyRatio = user.fromCurrency / user.toCurrency
+        let cash = user.cash * currencyRatio
+        let stockWorth = user.lastStockWorth * currencyRatio
+        let messgae = "Your liquid cash is: \(cash.toString2Digits())\(user.currencySymbole). \n Your stocks worth is:  \(stockWorth.toString2Digits())\(user.currencySymbole)."
+        delgate.showUserFullBalnce("Full Balance", messgae)
     }
 }
 

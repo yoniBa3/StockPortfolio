@@ -56,10 +56,10 @@ class HomeViewController: UIViewController{
     }
     
     private func configureTable(){
+        //CurrencyTableView
         currencyTableView.tableFooterView = UIView(frame: .zero)
         currencyTableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        
-        
+        //StockTableView
         stocksTableView.tableFooterView = UIView(frame: .zero)
         stocksTableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
@@ -74,13 +74,22 @@ class HomeViewController: UIViewController{
         
     }
     
+    func showUserFullBalance(){
+        balanceLabel.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(showBalance))
+        balanceLabel.addGestureRecognizer(gesture)
+    }
+    
+    @objc func showBalance(){
+        presnter.showFullBalanceInAlert()
+    }
+    
     
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == CellScreenViewController.identifier{
             if let CellScreenVC = segue.destination as? CellScreenViewController{
-                CellScreenVC.stockDetaile = presnter.chosenStockDetail
                 CellScreenVC.stock = presnter.chosenStock
             }
         }
@@ -179,8 +188,12 @@ extension HomeViewController: HomeScreenPresenterDelegate{
         activityIndicator.stopAnimating()
         balanceLabel.text = "\(moneyAmount) \(currencySymbole)"
         profitStatuseImage.image = statusImage
-        
-        
+        showUserFullBalance()
+
+    }
+    
+    func showUserFullBalnce(_ title: String, _ message: String) {
+        showAlertController(title, message)
     }
     
     func refreshUserMoneyAmountInDifferentCurency(_ moneyAmount: String, _ currencySymbole: String) {
