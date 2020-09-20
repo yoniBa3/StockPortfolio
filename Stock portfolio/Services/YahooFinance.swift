@@ -88,7 +88,7 @@ class YahooFinance : ApiProtocol{
         guard let url = URL(string: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail?region=US&lang=en&symbol=\(symbole)") else{return}
         let headers = [
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key": "6f119be22bmsh0df81fc55126bb9p11ee86jsn6f5dc862c020"
+            "x-rapidapi-key": "0a56714341mshcfa4870e99dbd68p1f4e03jsn984e83a81850"
         ]
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 15.0)
         request.httpMethod = "GET"

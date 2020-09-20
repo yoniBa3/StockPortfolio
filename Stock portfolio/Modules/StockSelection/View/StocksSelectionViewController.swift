@@ -78,6 +78,12 @@ extension StocksSelectionViewController : UITableViewDataSource{
         
         if let stockVM = stockSelectionPresenter.getStockVM(withSection: indexPath.section, AtRow: indexPath.row){
             cell.configureCell(with: stockVM)
+            
+            if let isExpended = stockSelectionPresenter.checkIfIsExpended(withSection: indexPath.section){
+                if isExpended{
+                    cell.configureIfOpen(with: stockVM)
+                }
+            }
         }
         
         return cell

@@ -13,7 +13,9 @@ class StockVMTableViewCell: UITableViewCell {
     //MARK: -Outlets
     @IBOutlet weak var symcolLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
-
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     //MARK: -Properties
     public static let identifier = "StockCell"
@@ -31,8 +33,34 @@ class StockVMTableViewCell: UITableViewCell {
     
     //MARK: -Functions
     func configureCell(with stockVM : StockVM){
-        symcolLabel.text = stockVM.symbole
-        companyLabel.text = stockVM.company
+        symcolLabel.text = "Symbole: \(stockVM.symbole)"
+        companyLabel.text = "Company: \(stockVM.company)"
+        priceLabel.text = "Price: "
+        activityIndicator.startAnimating()
+    }
+    
+    func configureIfOpen(with stockVM : StockVM){
+        
+               YahooFinance.shared.serverRequestWithStockStruct(with: stockVM.symbole) { (result) in
+                   self.activityIndicator.stopAnimating()
+                   switch result{
+                   case.success(let stockDetaile):
+                       if let price = stockDetaile.price?.regularMarketPrice?.raw{
+                           let currencyTupple = self.getCurrency()
+                           self.priceLabel.text = "Price: \((price *  currencyTupple.rate).withSeperator())\(currencyTupple.symbole)"
+                       }else{
+                           self.priceLabel.text = "Price: N/A"
+                       }
+                       
+                   case.failure(_):
+                       self.priceLabel.text = "Price: N/A"
+                   }
+               }
+    }
+    
+    func getCurrency() -> (rate: Double ,symbole:String){
+        let user = Utilities.shared.user
+        return (user.fromCurrency/user.toCurrency ,user.currencySymbole)
     }
 
 }
