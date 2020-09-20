@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eQs-Ot-4yq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eQs-Ot-4yq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -95,6 +95,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sz5-TW-3dC" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="177" height="40"/>
                                         <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Register"/>
                                         <connections>
                                             <action selector="registerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ar1-cZ-AgB"/>
@@ -104,6 +105,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEp-ez-GF4" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
                                         <rect key="frame" x="197" y="0.0" width="177" height="40"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
                                             <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kef-DP-Ca8"/>
@@ -543,6 +545,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsI-FU-kAg">
                                                 <rect key="frame" x="0.0" y="0.0" width="172" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="Register"/>
                                                 <connections>
                                                     <action selector="registerTapped:" destination="Hg3-Mp-1Us" eventType="touchUpInside" id="Tdu-um-CbS"/>
@@ -551,6 +554,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnO-pl-89t">
                                                 <rect key="frame" x="202" y="0.0" width="172" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -716,7 +720,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sum of cell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeJ-u3-6Rc">
-                                <rect key="frame" x="10" y="612" width="394" height="40"/>
+                                <rect key="frame" x="10" y="602" width="394" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="s7d-1n-dfb"/>
                                 </constraints>
@@ -725,19 +729,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="fA4-Hv-AvV">
-                                <rect key="frame" x="30" y="742" width="354" height="30"/>
+                                <rect key="frame" x="30" y="732" width="354" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARk-Or-GkP" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="40"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="SBA-Io-Jeh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Cell"/>
                                         <connections>
                                             <action selector="cellButtonTapped:" destination="7hv-xZ-RhK" eventType="touchUpInside" id="Z4F-Ov-lsx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2K1-GG-FXB" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
-                                        <rect key="frame" x="192" y="0.0" width="162" height="30"/>
+                                        <rect key="frame" x="192" y="0.0" width="162" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="goK-Qh-lxR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -748,7 +760,7 @@
                                 </subviews>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="3Wr-v5-SNK">
-                                <rect key="frame" x="188.5" y="545" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="535" width="37" height="37"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
@@ -851,19 +863,27 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="9z6-EK-0l7">
-                                <rect key="frame" x="30" y="742" width="354" height="30"/>
+                                <rect key="frame" x="30" y="732" width="354" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q59-mF-Pfr" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="162" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="40"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="NfB-P2-KDj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Buy"/>
                                         <connections>
                                             <action selector="buyButtonTapped:" destination="Bp9-9d-X1A" eventType="touchUpInside" id="Gfv-7O-Ru3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTE-za-v84" customClass="CustomButton" customModule="Stock_portfolio" customModuleProvider="target">
-                                        <rect key="frame" x="192" y="0.0" width="162" height="30"/>
+                                        <rect key="frame" x="192" y="0.0" width="162" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hha-8i-y7u"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -874,7 +894,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sum of buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oD-Us-8BI">
-                                <rect key="frame" x="10" y="602" width="394" height="40"/>
+                                <rect key="frame" x="10" y="592" width="394" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="R92-Hj-obJ"/>
                                 </constraints>
@@ -883,7 +903,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="sDE-Xc-qK6">
-                                <rect key="frame" x="188.5" y="535" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="525" width="37" height="37"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>

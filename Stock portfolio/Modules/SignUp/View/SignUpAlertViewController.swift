@@ -53,7 +53,6 @@ class SignUpAlertViewController: UIViewController {
         
         messageLabel.isHidden = true
         
-        //buttons.forEach {$0.layer.cornerRadius = $0.frame.size.height / 2}
     }
     
     //check the filds if everthing is OK return nil otherwise rturn the error

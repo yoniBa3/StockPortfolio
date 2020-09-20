@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F566F7FE59DC5257BEC24D5 /* Pods_Stock_portfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2C60BCEA250E0BD4D4F316 /* Pods_Stock_portfolio.framework */; };
+		E906B7EC2513A278001BB700 /* BuyStockVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E906B7EB2513A278001BB700 /* BuyStockVM.swift */; };
 		E94E0C1F24F07B750087BAFC /* stocks_names.list.json in Resources */ = {isa = PBXBuildFile; fileRef = E94E0C1E24F07B750087BAFC /* stocks_names.list.json */; };
 		E94E0C2624F07FD00087BAFC /* StocksSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C2524F07FD00087BAFC /* StocksSelectionViewController.swift */; };
 		E94E0C2824F088420087BAFC /* StockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C2724F088420087BAFC /* StockViewModel.swift */; };
@@ -18,7 +19,6 @@
 		E94E0C3424F125950087BAFC /* ExpandableHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C3324F125950087BAFC /* ExpandableHeaderFooterView.swift */; };
 		E94E0C7424F6E9770087BAFC /* BuyScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C7324F6E9770087BAFC /* BuyScreenViewController.swift */; };
 		E94E0C7624F96BCF0087BAFC /* StockDetaile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C7524F96BCF0087BAFC /* StockDetaile.swift */; };
-		E94E0C7E24FA2BE90087BAFC /* StockSummaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C7D24FA2BE90087BAFC /* StockSummaryDetail.swift */; };
 		E94E0C8424FE321C0087BAFC /* CellScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C8324FE321C0087BAFC /* CellScreenViewController.swift */; };
 		E94E0C8624FE6BCF0087BAFC /* Extensions + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C8524FE6BCF0087BAFC /* Extensions + UIAlertController.swift */; };
 		E94E0C8824FE79880087BAFC /* Extensions + Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E0C8724FE79880087BAFC /* Extensions + Double.swift */; };
@@ -67,6 +67,7 @@
 /* Begin PBXFileReference section */
 		8B8709CC712AEE1C68A86ED2 /* Pods-Stock portfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock portfolio.release.xcconfig"; path = "Target Support Files/Pods-Stock portfolio/Pods-Stock portfolio.release.xcconfig"; sourceTree = "<group>"; };
 		BB236495E4F901A94DAFB43D /* Pods-Stock portfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock portfolio.debug.xcconfig"; path = "Target Support Files/Pods-Stock portfolio/Pods-Stock portfolio.debug.xcconfig"; sourceTree = "<group>"; };
+		E906B7EB2513A278001BB700 /* BuyStockVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyStockVM.swift; sourceTree = "<group>"; };
 		E94E0C1E24F07B750087BAFC /* stocks_names.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stocks_names.list.json; sourceTree = "<group>"; };
 		E94E0C2524F07FD00087BAFC /* StocksSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksSelectionViewController.swift; sourceTree = "<group>"; };
 		E94E0C2724F088420087BAFC /* StockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewModel.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		E94E0C6B24F599070087BAFC /* UserStockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStockTableViewCell.swift; sourceTree = "<group>"; };
 		E94E0C7324F6E9770087BAFC /* BuyScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyScreenViewController.swift; sourceTree = "<group>"; };
 		E94E0C7524F96BCF0087BAFC /* StockDetaile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetaile.swift; sourceTree = "<group>"; };
-		E94E0C7D24FA2BE90087BAFC /* StockSummaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockSummaryDetail.swift; sourceTree = "<group>"; };
 		E94E0C8324FE321C0087BAFC /* CellScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellScreenViewController.swift; sourceTree = "<group>"; };
 		E94E0C8524FE6BCF0087BAFC /* Extensions + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions + UIAlertController.swift"; sourceTree = "<group>"; };
 		E94E0C8724FE79880087BAFC /* Extensions + Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions + Double.swift"; sourceTree = "<group>"; };
@@ -154,16 +154,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E906B7EA2513A1AE001BB700 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E954B4AC24E47DA9001CA217 /* CustomButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E94E0C2024F07F240087BAFC /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				E94E0C9E250419590087BAFC /* FirstLoading */,
 				E94E0C9A2504192B0087BAFC /* SignUp */,
 				E94E0C962503E6990087BAFC /* LogIn */,
-				E94E0C7F24FE31DE0087BAFC /* CellScreen */,
 				E94E0C7724F97A7D0087BAFC /* HomeScreen */,
-				E94E0C6D24F6E7F90087BAFC /* BuyScreen */,
+				E94E0C7F24FE31DE0087BAFC /* CellScreen */,
 				E94E0C2124F07F330087BAFC /* StockSelection */,
+				E94E0C6D24F6E7F90087BAFC /* BuyScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 		E94E0C6E24F6E8AE0087BAFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E906B7EB2513A278001BB700 /* BuyStockVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -447,6 +456,7 @@
 				E95C846E24E70BD900FC2A89 /* Utilities */,
 				E954B4A924E46FCC001CA217 /* Extensions */,
 				E95C848424E9B3C400FC2A89 /* Model */,
+				E906B7EA2513A1AE001BB700 /* View */,
 				E94E0C2024F07F240087BAFC /* Modules */,
 				E954B48324E4555F001CA217 /* AppDelegate.swift */,
 				E954B48524E4555F001CA217 /* SceneDelegate.swift */,
@@ -454,7 +464,6 @@
 				E954B4A824E45579001CA217 /* Supporting Files */,
 				E954B49424E45564001CA217 /* Info.plist */,
 				E954B48C24E4555F001CA217 /* Stock_portfolio.xcdatamodeld */,
-				E954B4AC24E47DA9001CA217 /* CustomButton.swift */,
 				E954B4B024E5C2BE001CA217 /* GoogleService-Info.plist */,
 			);
 			path = "Stock portfolio";
@@ -520,7 +529,6 @@
 				E95C848F24EC532500FC2A89 /* Currency.swift */,
 				E94E0C2A24F089CF0087BAFC /* Stock.swift */,
 				E94E0C7524F96BCF0087BAFC /* StockDetaile.swift */,
-				E94E0C7D24FA2BE90087BAFC /* StockSummaryDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -713,7 +721,7 @@
 				E94E0CA4250419EA0087BAFC /* LogIngViewController.swift in Sources */,
 				E94E0C8624FE6BCF0087BAFC /* Extensions + UIAlertController.swift in Sources */,
 				E954B4AD24E47DA9001CA217 /* CustomButton.swift in Sources */,
-				E94E0C7E24FA2BE90087BAFC /* StockSummaryDetail.swift in Sources */,
+				E906B7EC2513A278001BB700 /* BuyStockVM.swift in Sources */,
 				E94E0CA2250419C80087BAFC /* LoadingViewController.swift in Sources */,
 				E94E0C2D24F08A2E0087BAFC /* StockSelectionPresenter.swift in Sources */,
 				E94E0C8424FE321C0087BAFC /* CellScreenViewController.swift in Sources */,

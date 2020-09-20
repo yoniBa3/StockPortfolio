@@ -31,12 +31,12 @@ class BuyScreenViewController: UIViewController {
     private var stockDetail: StockDetaile?
     var bill: Double?
     var user:User!
+    var buyStockVM: BuyStockVM!
+    
+    //MARK: -Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        
         configurePage()
     }
     
@@ -60,13 +60,15 @@ class BuyScreenViewController: UIViewController {
     @IBAction func startEditingTapped(_ sender: UITextField) {
         
         if let text = sender.text{
-            sumOfBuy.isHidden = false
-            if let amount = Int(text){
-                if let price = stockDetail?.price?.regularMarketPrice?.raw{
-                    sumOfBuy.text = "Cost: \(((Double(amount) * price) * (user.fromCurrency / user.toCurrency)).toString2Digits()) \(user.currencySymbole)"
-                    
+            if !text.isEmpty{
+                sumOfBuy.isHidden = false
+                if let amount = Int(text){
+                    self.sumOfBuy.text = buyStockVM.getBillForLabel(amountOfStocks: amount)
                 }
+            }else{
+                sumOfBuy.isHidden = true
             }
+            
         }
     }
     
@@ -91,10 +93,17 @@ class BuyScreenViewController: UIViewController {
     }
     
     private func loadDataFromAPI(){
-        if let symbole = stockVM?.symbole{
-            YahooFinance.shared.serverRequestWithStockStruct(with: symbole) { (stockDetail) in
-                self.stockDetail = stockDetail
-                self.showDataOfStock()
+        if let stock = stockVM{
+            YahooFinance.shared.serverRequestWithStockStruct(with: stock.symbole) { (result) in
+                switch result{
+                case.failure(let description):
+                    if let description = description{
+                        self.showAlertController("Alert", description)
+                    }
+                case.success(let stockDetaile):
+                    self.buyStockVM = BuyStockVM(stockDetail: stockDetaile, stock: stock)
+                    self.showDataOfStock()
+                }
             }
         }
     }
@@ -102,56 +111,32 @@ class BuyScreenViewController: UIViewController {
     private func showDataOfStock(){
         amountOfStocks.isEnabled = true
         activityIndicator.stopAnimating()
-        if let stockDetail = stockDetail{
-            if let price = stockDetail.price?.regularMarketPrice?.raw{
-                stockPrice.text = "Price: \((price * user.fromCurrency / user.toCurrency).toString2Digits()) \(user.currencySymbole)"
-            }
-            
-            if let company = stockVM?.company{
-                companyLabel.text = "Company: \(company)"
-            }
-            
-            if let marketCap = stockDetail.price?.marketCap?.fmt{
-                marketKApLabel.text = "MarketCap: \(marketCap)"
-            }else{
-                marketKApLabel.text = "MarketCap: N/A"
-            }
-        }
-        var yourAmountOfStock = 0
-        if let symbole = stockVM?.symbole{
-            if let stock = Utilities.shared.user.stocks.first(where: {$0.symbole == symbole}){
-                yourAmountOfStock = stock.amount
-            }
-        }
-        yourStockAmount.text = "You Own:\(yourAmountOfStock)"
+        stockPrice.text = buyStockVM.priceForLabel
+        companyLabel.text = buyStockVM.company
+        marketKApLabel.text = buyStockVM.marketKap
+        yourStockAmount.text = buyStockVM.userAmountOfStocksForLabel
+        
     }
     
     private func validateBuy(){
-        if let textFromTextField = amountOfStocks.text{
-            if let amount = Int(textFromTextField){
-                let userCash = Utilities.shared.user.cash
-                if let price = stockDetail?.price?.regularMarketPrice?.raw{
-                    let bill = Double(amount) * price
-                    if userCash < bill{
-                        showAlertController("Alert", "You dont have enough Money to buy...")
-                    }else{
-                        UserDataBase.shared.buyStock(amount, stockSymbole: self.stockVM!.symbole, stockCompany: self.stockVM!.company, cost: bill) { (finish) in
-                            if finish{
-                                self.showAlertController("Congratulations", "You have purchased \(amount) \(self.stockVM!.symbole) stocks ")
-                                UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
-                                    if  let amountOfStocks = Utilities.shared.user.stocks.first(where: {$0.symbole == self.stockVM?.symbole})?.amount{
-                                        self.yourStockAmount.text = "You Own: \(amountOfStocks)"
-                                        self.amountOfStocks.text = ""
-                                    }
-                                    
-                                }
+        if let chosenAmountStockToBuy = amountOfStocks.text{
+            if let amount = Int(chosenAmountStockToBuy){
+                if buyStockVM.userCash < buyStockVM.getBill(amount){
+                    showAlertController("Alert", "You dont have enough Money to buy...")
+                }else{
+                    UserDataBase.shared.buyStock(amount, stockSymbole: self.stockVM!.symbole, stockCompany: self.stockVM!.company, cost: buyStockVM.getBill(amount)) { (finish) in
+                        if finish{
+                            self.showAlertController("Congratulations", "You have purchased \(amount) \(self.stockVM!.symbole) stocks ")
+                            UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
+                                self.yourStockAmount.text = self.buyStockVM.userAmountOfStocksForLabel
+                                self.amountOfStocks.text = ""
                             }
-                            
                         }
                     }
                 }
             }
         }
     }
+    
 }
 

@@ -12,7 +12,8 @@ protocol HomeScreenPresenterDelegate {
     func loadStockTable()
     func showUserMoneyAmount(_ moneyAmount: String ,_ currencySymbole: String ,_ statusAcount: AcountStatus)
     func refreshUserMoneyAmountInDifferentCurency(_ moneyAmount: String , _ currencySymbole: String)
-    func showUserFullBalnce(_ title: String ,_ message:String)
+    func showInformation(_ title: String ,_ message:String)
+    func setNavigatorTitle(_ title:String)
 }
 
 import Foundation
@@ -61,6 +62,9 @@ class HomeScreenPresenter{
     init(delegate: HomeScreenPresenterDelegate) {
         self.delgate = delegate
         configurePresenter()
+        let title = Utilities.shared.user.firstName
+        let fullTittle = "\(title)'s portfoliio"
+        delegate.setNavigatorTitle(fullTittle)
         
     }
     
@@ -86,9 +90,17 @@ class HomeScreenPresenter{
     private func loadUserStockForTable(){
         for stockVM in self.homeScreenStockVM{
             let symbole = stockVM.symbole
-            YahooFinance.shared.serverRequestWithStockStruct(with: symbole) {self.userStocks.append(($0, stockVM.amount))}
+            YahooFinance.shared.serverRequestWithStockStruct(with: symbole) { (result) in
+                switch result{
+                case.failure(let description):
+                    if let description = description{
+                        self.delgate.showInformation("Error", description)
+                    }
+                case.success(let stockDetaile):
+                    self.userStocks.append((stockDetaile ,stockVM.amount))
+                }
+            }
         }
-        
     }
     
     private func checkUserMoneyAcount(){
@@ -112,12 +124,9 @@ class HomeScreenPresenter{
         
         let user = Utilities.shared.user
         
-        UserDataBase.shared.saveLastStockWorth(user.uId, worth: newStockWorth) { (finish) in
-            if finish{
-                print("success")
-            }
+        UserDataBase.shared.saveLastStockWorth(user.uId, worth: newStockWorth) { (_) in
         }
-        let moneyAmount = ((user.cash + newStockWorth) * user.fromCurrency / user.toCurrency).toString2Digits()
+        let moneyAmount = ((user.cash + newStockWorth) * user.fromCurrency / user.toCurrency).withSeperator()
         delgate.showUserMoneyAmount(moneyAmount, user.currencySymbole, statusAcount)
         
         
@@ -136,7 +145,7 @@ class HomeScreenPresenter{
     
     
     func setUserStockSelection(atIndex index: Int) {
-        if userStocks.count > index {
+        if homeScreenStockVM.count > index {
             chosenStock = homeScreenStockVM[index]
         }
     }
@@ -157,18 +166,25 @@ class HomeScreenPresenter{
         }
     }
     
+    
     private func loadDataForCureenciesTable(){
-        CurrencyValue.shared.serverRequestWithCurrencyStruct { (currencyFromServer) in
-            var currencyCodeArray: CurrencyCodeDictionary = [:]
-            for currency in currencyFromServer.currencyRates{
-                if let temp = self.curreciesWithSymboles[currency.key]{
-                    self.currenciesCode.append((currency.key ,currency.value))
-                    currencyCodeArray[currency.key] = CurrencyDataForTable(symbole: temp.symbol, symboleNative: temp.symbolNative, ExchangeRate: currency.value, namePlural: temp.namePlural)
+        CurrencyValue.shared.serverRequestWithCurrencyStruct { (result) in
+            switch result{
+            case.failure(let description):
+                if let description = description{
+                    self.delgate.showInformation("Alert", description)
                 }
+            case.success(let currencyFromServer):
+                var currencyCodeArray: CurrencyCodeDictionary = [:]
+                for currency in currencyFromServer.currencyRates{
+                    if let temp = self.curreciesWithSymboles[currency.key]{
+                        self.currenciesCode.append((currency.key ,currency.value))
+                        currencyCodeArray[currency.key] = CurrencyDataForTable(symbole: temp.symbol, symboleNative: temp.symbolNative, ExchangeRate: currency.value, namePlural: temp.namePlural)
+                    }
+                }
+                self.currenciesDictionary = currencyCodeArray
+                self.currenciesCode.sort {$0.1 > $1.1}
             }
-            self.currenciesDictionary = currencyCodeArray
-            self.currenciesCode.sort {$0.1 > $1.1}
-            
             
         }
     }
@@ -191,7 +207,7 @@ class HomeScreenPresenter{
             let currency = currenciesDictionary[code]!
             UserDataBase.shared.changeToCurrency(toCurrency: currency.ExchangeRate, curencySymbole: currency.symboleNative) {
                 let user = Utilities.shared.user
-                let moneyAmount = ((user.cash + user.lastStockWorth) * user.fromCurrency / user.toCurrency).toString2Digits()
+                let moneyAmount = ((user.cash + user.lastStockWorth) * user.fromCurrency / user.toCurrency).withSeperator()
                 self.delgate.refreshUserMoneyAmountInDifferentCurency(moneyAmount, user.currencySymbole)
             }
         }
@@ -214,8 +230,8 @@ class HomeScreenPresenter{
         let currencyRatio = user.fromCurrency / user.toCurrency
         let cash = user.cash * currencyRatio
         let stockWorth = user.lastStockWorth * currencyRatio
-        let messgae = "Your liquid cash is: \(cash.toString2Digits())\(user.currencySymbole). \n Your stocks worth is:  \(stockWorth.toString2Digits())\(user.currencySymbole)."
-        delgate.showUserFullBalnce("Full Balance", messgae)
+        let messgae = "Your liquid cash is: \(cash.withSeperator())\(user.currencySymbole). \n Your stocks worth is:  \(stockWorth.withSeperator())\(user.currencySymbole)."
+        delgate.showInformation("Full Balance", messgae)
     }
 }
 

@@ -27,7 +27,6 @@ class CellScreenViewController: UIViewController {
     
     //MARK: -Lifecycle
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePage()
@@ -63,21 +62,31 @@ class CellScreenViewController: UIViewController {
     
     
     //MARK: -Functions
-
+    
     private func configurePage(){
         sumOfCellLabel.isHidden = true
         stockAmountTextField.isEnabled = false
         cellButton.isEnabled = false
         configureBackButton()
+        loadDataFromApi()
+        
+    }
     
+    private func loadDataFromApi(){
         if let stock = stock{
             stockSymboleLabel.text = stock.symbole
-            YahooFinance.shared.serverRequestWithStockStruct(with: stock.symbole) { (stockDetaile) in
-                self.cellStockVM = CellStockVM(stockDetail: stockDetaile, stock: stock)
-                self.showStockData()
+            YahooFinance.shared.serverRequestWithStockStruct(with: stock.symbole) { (result) in
+                switch result{
+                case.failure(let description):
+                    if let description = description{
+                        self.showAlertController("Alert", description)
+                    }
+                case.success(let stockDeatile):
+                    self.cellStockVM = CellStockVM(stockDetail: stockDeatile, stock: stock)
+                    self.showStockData()
+                }
             }
         }
-    
     }
     
     private func configureBackButton(){
@@ -98,31 +107,31 @@ class CellScreenViewController: UIViewController {
         companyLabel.text = cellStockVM.company
         marketCapLabel.text = cellStockVM.marketKap
         yourAmountOfStocks.text = cellStockVM.userAmountOfStocksForLabel
-            
+        
     }
     
     private func validateCell(){
         if let chosenAmountToCellText = stockAmountTextField.text{
             if let chosenAmountToCell = Int(chosenAmountToCellText){
                 if cellStockVM.userAmountOfStocks == 0{
-                        showAlertController("Alert", "You have to cell at list 1 stock")
-                        return
-                    }
-                    if chosenAmountToCell > cellStockVM.userAmountOfStocks{
-                        showAlertController("Alert", "You want to cell more stocks then you have")
-                        
-                    }else{
-                        let bill = cellStockVM.getBill(chosenAmountToCell)
-                        self.activityIndicator.startAnimating()
-                        UserDataBase.shared.cellStocks(chosenAmountToCell, stock!.symbole, stock!.company, bill) { (finish) in
-                            if finish{
-                                self.activityIndicator.stopAnimating()
-                                self.showAlertController("Congretulations", "You cell has been approved")
-                                UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
-                                    self.yourAmountOfStocks.text = self.cellStockVM.userAmountOfStocksForLabel
-                                    self.stockAmountTextField.text = ""
-                                }
+                    showAlertController("Alert", "You have to cell at list 1 stock")
+                    return
+                }
+                if chosenAmountToCell > cellStockVM.userAmountOfStocks{
+                    showAlertController("Alert", "You want to cell more stocks then you have")
+                    
+                }else{
+                    let bill = cellStockVM.getBill(chosenAmountToCell)
+                    self.activityIndicator.startAnimating()
+                    UserDataBase.shared.cellStocks(chosenAmountToCell, stock!.symbole, stock!.company, bill) { (finish) in
+                        if finish{
+                            self.activityIndicator.stopAnimating()
+                            self.showAlertController("Congretulations", "You cell has been approved")
+                            UserDataBase.shared.getUserInformation(Utilities.shared.user.uId) { (finish) in
+                                self.yourAmountOfStocks.text = self.cellStockVM.userAmountOfStocksForLabel
+                                self.stockAmountTextField.text = ""
                             }
+                        }
                     }
                 }
             }else{

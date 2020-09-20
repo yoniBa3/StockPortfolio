@@ -34,20 +34,6 @@ struct CurrencyData:Codable{
 
 typealias CurrencySymboles = [String: CurrencyData]
 
-
-//struct CurrencyDataForTable:Codable ,Comparable{
-//
-//
-//    var code:String
-//    var symbole:String
-//    var ExchangeRate:Double
-//    var namePlural:String
-//
-//    static func < (lhs: CurrencyDataForTable, rhs: CurrencyDataForTable) -> Bool {
-//        return lhs.code < rhs.code
-//    }
-//}
-
 struct CurrencyDataForTable:Codable ,Comparable{
     
     var symbole:String

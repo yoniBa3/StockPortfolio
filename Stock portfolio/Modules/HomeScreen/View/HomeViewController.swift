@@ -59,6 +59,7 @@ class HomeViewController: UIViewController{
         //CurrencyTableView
         currencyTableView.tableFooterView = UIView(frame: .zero)
         currencyTableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+       
         //StockTableView
         stocksTableView.tableFooterView = UIView(frame: .zero)
         stocksTableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -165,6 +166,10 @@ extension HomeViewController: UISearchBarDelegate{
 }
 
 extension HomeViewController: HomeScreenPresenterDelegate{
+    func setNavigatorTitle(_ title: String) {
+        self.title = title
+    }
+    
     func loadCurrencyTable() {
         currencyTableView.reloadData()
         self.currencyActivityIndiactor.stopAnimating()
@@ -192,7 +197,7 @@ extension HomeViewController: HomeScreenPresenterDelegate{
 
     }
     
-    func showUserFullBalnce(_ title: String, _ message: String) {
+    func showInformation(_ title: String, _ message: String) {
         showAlertController(title, message)
     }
     

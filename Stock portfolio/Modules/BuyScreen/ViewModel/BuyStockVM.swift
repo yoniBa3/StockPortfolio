@@ -1,29 +1,34 @@
 //
-//  CellStockVM.swift
+//  BuyStockVM.swift
 //  Stock portfolio
 //
-//  Created by Yoni on 11/09/2020.
+//  Created by Yoni on 17/09/2020.
 //  Copyright © 2020 Yoni. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class CellStockVM{
-    let stockDetail: StockDetaile
-    let stock: HomeScreenStockVM
+class BuyStockVM {
+    let stockDetaile: StockDetaile
+    let stock: StockVM
     
-    init(stockDetail: StockDetaile ,stock: HomeScreenStockVM) {
+    init(stockDetail: StockDetaile ,stock: StockVM){
+        self.stockDetaile = stockDetail
         self.stock = stock
-        self.stockDetail = stockDetail
     }
+    
     
     var priceForLabel:String {
        let currencyTupple = getCurrencyRatio()
-        if let price = stockDetail.price?.regularMarketPrice?.raw{
+        if let price = stockDetaile.price?.regularMarketPrice?.raw{
             let message = "Price: \((price * currencyTupple.ratio).toString2Digits()) \(currencyTupple.symbole)"
             return message
         }
         return "Price : N/A"
+    }
+    
+    var userCash:Double{
+        return Utilities.shared.user.cash
     }
     
     var userAmountOfStocksForLabel: String{
@@ -48,11 +53,32 @@ class CellStockVM{
     
     var marketKap: String{
         let currencyTupple = getCurrencyRatio()
-        if let marketCap = stockDetail.price?.marketCap?.raw{
+        if let marketCap = stockDetaile.price?.marketCap?.raw{
             let message = "MarketCap: \((Double(marketCap) * currencyTupple.ratio).roundedWithAbbreviations()) \(currencyTupple.symbole)"
             return message
         }
         return "MarketCap : N/A"
+    }
+    
+    func getBillForLabel(amountOfStocks : Int) -> String{
+        if amountOfStocks == 0{
+            return ""
+        }
+        let currenyTupple = getCurrencyRatio()
+        if let price = stockDetaile.price?.regularMarketPrice?.raw{
+            let message = "Worth: \((price * Double(amountOfStocks) * currenyTupple.ratio).toString2Digits())\(currenyTupple.symbole)"
+            return message
+        }
+        return ""
+    }
+    
+    func getBill(_ amountOfStocks: Int) -> Double{
+        if let price = stockDetaile.price?.regularMarketPrice?.raw{
+            return price * Double(amountOfStocks)
+        }
+        else{
+            return 0
+        }
     }
     
     func getCurrencyRatio() -> (ratio:Double ,symbole:String){
@@ -61,27 +87,4 @@ class CellStockVM{
         let symbole = user.currencySymbole
         return (ratio ,symbole)
     }
-    
-    
-    func getBillForLabel(amountOfStocks : Int) -> String{
-        if amountOfStocks == 0{
-            return ""
-        }
-        let currenyTupple = getCurrencyRatio()
-        if let price = stockDetail.price?.regularMarketPrice?.raw{
-            let message = "Worth: \((price * Double(amountOfStocks) * currenyTupple.ratio).withSeperator().toStringDigits())\(currenyTupple.symbole)"
-            return message
-        }
-        return ""
-    }
-    
-    func getBill(_ amountOfStocks: Int) -> Double{
-        if let price = stockDetail.price?.regularMarketPrice?.raw{
-            return price * Double(amountOfStocks)
-        }
-        else{
-            return 0
-        }
-    }
-    
 }
