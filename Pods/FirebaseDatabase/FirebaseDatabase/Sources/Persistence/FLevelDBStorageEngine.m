@@ -166,7 +166,7 @@ static NSString *trackedQueryKeysKey(NSUInteger trackedQueryId, NSString *key) {
             // it'll go fine :P
             [writes enumerateKeysAndValuesAsData:^(NSString *key, NSData *data,
                                                    BOOL *stop) {
-              id pendingPut = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+              id pendingPut = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:nil];
               if ([pendingPut isKindOfClass:[FPendingPut class]]) {
                   FPendingPut *put = pendingPut;
                   id<FNode> newNode =

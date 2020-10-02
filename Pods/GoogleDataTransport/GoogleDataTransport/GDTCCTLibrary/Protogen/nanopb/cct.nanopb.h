@@ -19,7 +19,7 @@
 
 #ifndef PB_GDT_CCT_CCT_NANOPB_H_INCLUDED
 #define PB_GDT_CCT_CCT_NANOPB_H_INCLUDED
-#include <nanopb/pb.h>
+#include "nanopb/pb.h"
 
 /* @@protoc_insertion_point(includes) */
 #if PB_PROTO_HEADER_VERSION != 30
