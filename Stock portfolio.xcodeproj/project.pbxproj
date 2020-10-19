@@ -52,6 +52,9 @@
 		E95C849024EC532500FC2A89 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C848F24EC532500FC2A89 /* Currency.swift */; };
 		E95C849224EDB09C00FC2A89 /* CurrencySimbols.json in Resources */ = {isa = PBXBuildFile; fileRef = E95C849124EDA18D00FC2A89 /* CurrencySimbols.json */; };
 		E9A1C247250C008C0022520A /* CellStockVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1C246250C008C0022520A /* CellStockVM.swift */; };
+		E9C9DAAE252891CE00886830 /* CurrencyItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */; };
+		E9C9DAAF252891CE00886830 /* CurrencyItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */; };
+		E9C9DAB3252892C100886830 /* PersistenceManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAB2252892C100886830 /* PersistenceManger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		E95C848F24EC532500FC2A89 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		E95C849124EDA18D00FC2A89 /* CurrencySimbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CurrencySimbols.json; sourceTree = "<group>"; };
 		E9A1C246250C008C0022520A /* CellStockVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStockVM.swift; sourceTree = "<group>"; };
+		E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		E9C9DAB2252892C100886830 /* PersistenceManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManger.swift; sourceTree = "<group>"; };
 		EF2C60BCEA250E0BD4D4F316 /* Pods_Stock_portfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_portfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -525,6 +531,7 @@
 		E95C848424E9B3C400FC2A89 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9C9DA9B2528912500886830 /* CoreData */,
 				E95C848524E9B3D700FC2A89 /* User.swift */,
 				E95C848F24EC532500FC2A89 /* Currency.swift */,
 				E94E0C2A24F089CF0087BAFC /* Stock.swift */,
@@ -550,8 +557,18 @@
 				E95C848B24EC48D300FC2A89 /* ApiProtocol.swift */,
 				E95C848D24EC4D1F00FC2A89 /* CurrencyValue.swift */,
 				E94E0C2E24F08F270087BAFC /* YahooFinance.swift */,
+				E9C9DAB2252892C100886830 /* PersistenceManger.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		E9C9DA9B2528912500886830 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */,
+				E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -723,7 +740,9 @@
 				E954B4AD24E47DA9001CA217 /* CustomButton.swift in Sources */,
 				E906B7EC2513A278001BB700 /* BuyStockVM.swift in Sources */,
 				E94E0CA2250419C80087BAFC /* LoadingViewController.swift in Sources */,
+				E9C9DAB3252892C100886830 /* PersistenceManger.swift in Sources */,
 				E94E0C2D24F08A2E0087BAFC /* StockSelectionPresenter.swift in Sources */,
+				E9C9DAAF252891CE00886830 /* CurrencyItem+CoreDataProperties.swift in Sources */,
 				E94E0C8424FE321C0087BAFC /* CellScreenViewController.swift in Sources */,
 				E94E0C7424F6E9770087BAFC /* BuyScreenViewController.swift in Sources */,
 				E954B48424E4555F001CA217 /* AppDelegate.swift in Sources */,
@@ -732,6 +751,7 @@
 				E954B4AB24E46FF9001CA217 /* Extensions + UITextfield.swift in Sources */,
 				E94E0C7624F96BCF0087BAFC /* StockDetaile.swift in Sources */,
 				E954B48624E4555F001CA217 /* SceneDelegate.swift in Sources */,
+				E9C9DAAE252891CE00886830 /* CurrencyItem+CoreDataClass.swift in Sources */,
 				E94E0C2B24F089CF0087BAFC /* Stock.swift in Sources */,
 				E94E0C8F250398E50087BAFC /* HomeViewController.swift in Sources */,
 				E94E0CA3250419E60087BAFC /* SignUpAlertViewController.swift in Sources */,

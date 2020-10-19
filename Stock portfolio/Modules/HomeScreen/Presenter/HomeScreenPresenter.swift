@@ -41,7 +41,7 @@ class HomeScreenPresenter{
     //Currencies
     var curreciesWithSymboles:CurrencySymboles = [:] {
         didSet{
-            self.loadDataForCureenciesTable()
+            self.loadDataForCurrenciesTable()
         }
     }
     var currenciesCode = [(code:String,value:Double)](){
@@ -72,14 +72,15 @@ class HomeScreenPresenter{
     
     private func configurePresenter(){
         loadTableStockData()
-        readLoaclCurrencyJson()
+        readLocalCurrencyJson()
     }
     
     //Stocks Functions
      func loadTableStockData(){
         let user = Utilities.shared.user
         if user.stocks.count == 1 {
-            delgate.showUserMoneyAmount(user.cash.toString2Digits(), user.currencySymbole, .positive)
+            let userCash = (user.cash * user.fromCurrency / user.toCurrency).withSeperator()
+            delgate.showUserMoneyAmount(userCash, user.currencySymbole, .positive)
             return
         }
         self.homeScreenStockVM = user.stocks.filter{$0.name != ""}.map{HomeScreenStockVM($0)}
@@ -154,7 +155,7 @@ class HomeScreenPresenter{
     
     //Currencies Functions
     
-    private func readLoaclCurrencyJson(){
+    private func readLocalCurrencyJson(){
         if let path = Bundle.main.path(forResource: "CurrencySimbols", ofType: ".json"){
             do{
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
@@ -167,13 +168,11 @@ class HomeScreenPresenter{
     }
     
     
-    private func loadDataForCureenciesTable(){
+    private func loadDataForCurrenciesTable(){
         CurrencyValue.shared.serverRequestWithCurrencyStruct { (result) in
             switch result{
-            case.failure(let description):
-                if let description = description{
-                    self.delgate.showInformation("Alert", description)
-                }
+            case.failure(_):
+                self.loadCurrenciesDataFromCoreData()
             case.success(let currencyFromServer):
                 var currencyCodeArray: CurrencyCodeDictionary = [:]
                 for currency in currencyFromServer.currencyRates{
@@ -184,9 +183,47 @@ class HomeScreenPresenter{
                 }
                 self.currenciesDictionary = currencyCodeArray
                 self.currenciesCode.sort {$0.1 > $1.1}
+                
+                self.updateCurrencyItemsInCoreData(currencyFromServer: currencyFromServer)
             }
             
         }
+    }
+    
+    
+    private func loadCurrenciesDataFromCoreData(){
+        let currencyItems = PersistenceManger.shared.fetch(CurrencyItem.self)
+        if currencyItems.count != 0 {
+            var currencyCodeArray: CurrencyCodeDictionary = [:]
+            for curency in currencyItems{
+                self.currenciesCode.append((curency.symbole, curency.exchangeRate))
+                currencyCodeArray[curency.symbole] = CurrencyDataForTable(symbole: curency.symbole, symboleNative: curency.symboleNative, ExchangeRate: curency.exchangeRate, namePlural: curency.namePlural)
+            }
+            self.currenciesDictionary = currencyCodeArray
+            self.currenciesCode.sort {$0.1 > $1.1}
+        }else{
+            self.delgate.showInformation("Error", "There is no currency data to present")
+            self.delgate.loadCurrencyTable()
+        }
+      
+    }
+    
+    private func updateCurrencyItemsInCoreData(currencyFromServer:Currency){
+        let currenciyItems = PersistenceManger.shared.fetch(CurrencyItem.self)
+        if currenciyItems.count != 0{
+            for currency in currencyFromServer.currencyRates{
+                guard let item = currenciyItems.first(where: {$0.symbole == currency.key})else{continue}
+                item.exchangeRate = currency.value
+            }
+        }else{
+            for currency in currencyFromServer.currencyRates{
+                if let temp = self.curreciesWithSymboles[currency.key]{
+                    let _ = CurrencyItem(symbole: temp.symbol, symboleNative: temp.symbolNative, exchnageRate: currency.value, namePlural: temp.namePlural)
+                }
+            }
+        }
+        PersistenceManger.shared.saveContext()
+        
     }
     
     func getCurrenciesNumberOfRows() -> Int{
