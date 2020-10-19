@@ -53,37 +53,7 @@ class YahooFinance : ApiProtocol{
     }
     
     
-//    func serverRequestWithStockStruct(with symbole:String ,complation:@escaping(StockDetaile) ->()){
-//        guard let url = URL(string: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail?region=US&lang=en&symbol=\(symbole)") else{return}
-//            let headers = [
-//                "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-//                "x-rapidapi-key": "6f119be22bmsh0df81fc55126bb9p11ee86jsn6f5dc862c020"
-//            ]
-//            var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 15.0)
-//            request.httpMethod = "GET"
-//            request.allHTTPHeaderFields = headers
-//
-//            let session = URLSession.shared
-//            session.dataTask(with: request) { (data, res, err) in
-//                DispatchQueue.main.async {
-//
-//                    if let err = err{
-//                        print(err.localizedDescription)
-//                    }else{
-//                        do{
-//                            guard let data = data else{return}
-//                            let decoder = JSONDecoder()
-//                            let object = try decoder.decode(StockDetaile.self, from: data)
-//                            complation(object)
-//                        }catch{
-//                            print(error)
-//                        }
-//                    }
-//                }
-//            }.resume()
-//
-//    }
-    
+
     func serverRequestWithStockStruct(with symbole:String ,complation: @escaping(Result<StockDetaile>) -> ()){
         guard let url = URL(string: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail?region=US&lang=en&symbol=\(symbole)") else{return}
         let headers = [
