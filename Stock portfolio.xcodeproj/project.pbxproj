@@ -118,8 +118,8 @@
 		E95C848F24EC532500FC2A89 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		E95C849124EDA18D00FC2A89 /* CurrencySimbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CurrencySimbols.json; sourceTree = "<group>"; };
 		E9A1C246250C008C0022520A /* CellStockVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStockVM.swift; sourceTree = "<group>"; };
-		E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CurrencyItem+CoreDataClass.swift"; path = "Stock portfolio/Model/CoreData/CurrencyItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CurrencyItem+CoreDataProperties.swift"; path = "Stock portfolio/Model/CoreData/CurrencyItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		E9C9DAB2252892C100886830 /* PersistenceManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManger.swift; sourceTree = "<group>"; };
 		EF2C60BCEA250E0BD4D4F316 /* Pods_Stock_portfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_portfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
