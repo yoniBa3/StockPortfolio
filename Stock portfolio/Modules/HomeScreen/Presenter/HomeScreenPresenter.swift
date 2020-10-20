@@ -14,6 +14,7 @@ protocol HomeScreenPresenterDelegate {
     func refreshUserMoneyAmountInDifferentCurency(_ moneyAmount: String , _ currencySymbole: String)
     func showInformation(_ title: String ,_ message:String)
     func setNavigatorTitle(_ title:String)
+    func checkIfUserHasNoStocks(_ title:String)
 }
 
 import Foundation
@@ -134,7 +135,10 @@ class HomeScreenPresenter{
     }
     
     func getUserStocksNumberOfRows() -> Int{
-        homeScreenStockVM.count
+        if homeScreenStockVM.count == 0{
+            delgate.checkIfUserHasNoStocks("Your list is empty , Please buy stocks")
+        }
+        return homeScreenStockVM.count
     }
     
     func getHomeScreenStockVM(atIndex index:Int) -> HomeScreenStockVM?{

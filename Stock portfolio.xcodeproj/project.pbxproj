@@ -55,6 +55,7 @@
 		E9C9DAAE252891CE00886830 /* CurrencyItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */; };
 		E9C9DAAF252891CE00886830 /* CurrencyItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */; };
 		E9C9DAB3252892C100886830 /* PersistenceManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9DAB2252892C100886830 /* PersistenceManger.swift */; };
+		E9F3D6D1253EF6B10094DE77 /* Extensions + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D6D0253EF6B10094DE77 /* Extensions + UILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		E9C9DAAC252891CE00886830 /* CurrencyItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CurrencyItem+CoreDataClass.swift"; path = "Stock portfolio/Model/CoreData/CurrencyItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		E9C9DAAD252891CE00886830 /* CurrencyItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CurrencyItem+CoreDataProperties.swift"; path = "Stock portfolio/Model/CoreData/CurrencyItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		E9C9DAB2252892C100886830 /* PersistenceManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManger.swift; sourceTree = "<group>"; };
+		E9F3D6D0253EF6B10094DE77 /* Extensions + UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions + UILabel.swift"; sourceTree = "<group>"; };
 		EF2C60BCEA250E0BD4D4F316 /* Pods_Stock_portfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_portfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -500,6 +502,7 @@
 				E94E0C8524FE6BCF0087BAFC /* Extensions + UIAlertController.swift */,
 				E94E0C8724FE79880087BAFC /* Extensions + Double.swift */,
 				E94E0CA5250428C70087BAFC /* Extensions + UIActivityIndicator.swift */,
+				E9F3D6D0253EF6B10094DE77 /* Extensions + UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				E94E0CA2250419C80087BAFC /* LoadingViewController.swift in Sources */,
 				E9C9DAB3252892C100886830 /* PersistenceManger.swift in Sources */,
 				E94E0C2D24F08A2E0087BAFC /* StockSelectionPresenter.swift in Sources */,
+				E9F3D6D1253EF6B10094DE77 /* Extensions + UILabel.swift in Sources */,
 				E9C9DAAF252891CE00886830 /* CurrencyItem+CoreDataProperties.swift in Sources */,
 				E94E0C8424FE321C0087BAFC /* CellScreenViewController.swift in Sources */,
 				E94E0C7424F6E9770087BAFC /* BuyScreenViewController.swift in Sources */,

@@ -23,6 +23,7 @@ class HomeViewController: UIViewController{
     //MARK: -Properties
     var currencyActivityIndiactor = UIActivityIndicatorView()
     var presnter: HomeScreenPresenter!
+    var noStocksInList = UILabel()
     
     //MARK: -Lifecycle
     override func viewDidLoad() {
@@ -72,6 +73,7 @@ class HomeViewController: UIViewController{
         cellButton.setupeButton()
         cellButton.isEnabled = false
         configureTable()
+        
         
     }
     
@@ -205,6 +207,10 @@ extension HomeViewController: HomeScreenPresenterDelegate{
         balanceLabel.text = "\(moneyAmount) \(currencySymbole)"
     }
     
+    func checkIfUserHasNoStocks(_ title:String){
+        let point = stocksTableView.center
+        noStocksInList.setup(with: view, and: title, point: point)
+    }
     
 }
 
