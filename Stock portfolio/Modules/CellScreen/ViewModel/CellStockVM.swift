@@ -69,7 +69,8 @@ class CellStockVM{
         }
         let currenyTupple = getCurrencyRatio()
         if let price = stockDetail.price?.regularMarketPrice?.raw{
-            let message = "Worth: \((price * Double(amountOfStocks) * currenyTupple.ratio).withSeperator().toStringDigits())\(currenyTupple.symbole)"
+            let message = "Worth: \((price * Double(amountOfStocks) * currenyTupple.ratio).withSeperator())\(currenyTupple.symbole)"
+            print("price: \(price), amount of stocks: \(amountOfStocks) ")
             return message
         }
         return ""
