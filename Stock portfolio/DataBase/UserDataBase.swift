@@ -85,8 +85,13 @@ class UserDataBase{
                                 complation(true)
                             }else{
                                 if let stockId = documents?.documents[0].documentID{
-                                    stocks.document(stockId).setData(["amount":amount], merge: true)
-                                    complation(true)
+                                    if amount == 0{
+                                        stocks.document(stockId).delete()
+                                        complation(true)
+                                    }else{
+                                        stocks.document(stockId).setData(["amount":amount], merge: true)
+                                        complation(true)
+                                    }
                                 }
                             }
                             self.db.collection("users").document(document.documentID).setData(["cash":cash], merge: true)
